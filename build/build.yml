@@ -39,12 +39,11 @@ steps:
       restoreDirectory: 'packages'
       vstsFeed: '6a2d6fd3-0b16-40f0-b309-7175c4e86490'
 
-- task: MSBuild@1
+- task: DotNetCoreCLI@2
   displayName: Build CredentialProvider
   inputs:
-    solution: 'CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj'
-    configuration: '$(BuildConfiguration)'
-    msbuildArguments: '/t:rebuild'
+    projects: 'CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj'
+    arguments: '-c $(BuildConfiguration)'
 
 - ${{ if eq(parameters.sign, 'true') }}:
   - task: MSBuild@1
