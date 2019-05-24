@@ -12,6 +12,7 @@ variables:
   BuildConfiguration: 'Debug'
   PushNupkg: 'True'
   TeamName: 'Package Experience'
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
 steps:
 - task: DotNetCoreInstaller@0
@@ -29,6 +30,6 @@ steps:
   inputs:
     command: 'build'
     projects: 'CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj'
-    arguments: '-r netcoreapp3.0'
+    arguments: '-r netcoreapp3.0 --no-restore'
     feedsToUse: 'select'
     versioningScheme: 'off'
