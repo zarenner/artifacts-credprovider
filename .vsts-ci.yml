@@ -5,7 +5,7 @@ queue:
   demands: msbuild
 
 trigger:
-- master
+- core3-preview5
 
 variables:
   BuildConfiguration: 'Debug'
