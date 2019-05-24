@@ -30,6 +30,6 @@ steps:
   inputs:
     command: 'build'
     projects: 'CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj'
-    arguments: '-r netcoreapp3.0 --no-restore'
+    arguments: '--no-restore'
     feedsToUse: 'select'
     versioningScheme: 'off'
