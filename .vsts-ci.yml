@@ -5,14 +5,25 @@ queue:
   demands: msbuild
 
 trigger:
+- master
 - core3-preview5
 
 variables:
   BuildConfiguration: 'Debug'
-  PushNupkg: 'False'
+  PushNupkg: 'True'
   TeamName: 'Package Experience'
 
 steps:
-- template: build/build.yml
-  parameters:
-    nuspecProperties: 'VersionSuffix=-CI-$(Build.BuildNumber)'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    versioningScheme: 'off'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: 'CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj'''
+    arguments: '-c $(BuildConfiguration) -r netcoreapp3.0'
+    feedsToUse: 'select'
+    versioningScheme: 'off'
