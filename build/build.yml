@@ -4,9 +4,9 @@ parameters:
 
 steps:
 - task: DotNetCoreInstaller@0
-  displayName: Use .NET Core sdk 2.1.0
+  displayName: Use .NET Core sdk 3.0.100-preview5-011568
   inputs:
-    version: 2.1.300
+    version: 3.0.100-preview5-011568
 
 - task: DotNetCoreCLI@2
   displayName: dotnet restore NuGet.config
@@ -60,12 +60,12 @@ steps:
       DropFolder: '$(Build.ArtifactStagingDirectory)\$(BuildConfiguration)\vsix\'
 
 - task: DotNetCoreCLI@2
-  displayName: dotnet publish netcoreapp2.1
+  displayName: dotnet publish netcoreapp3.0
   inputs:
     command: publish
     publishWebProjects: false
     projects: 'CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj'
-    arguments: '--no-build --framework netcoreapp2.1 --configuration $(BuildConfiguration)'
+    arguments: '--no-build --framework netcoreapp3.0 --configuration $(BuildConfiguration)'
     zipAfterPublish: false
     modifyOutputPath: false
 
@@ -79,7 +79,7 @@ steps:
 - task: CopyFiles@2
   displayName: Copy netcore files into tarball
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)\CredentialProvider.Microsoft\bin\$(BuildConfiguration)\netcoreapp2.1\publish\'
+    sourceFolder: '$(Build.SourcesDirectory)\CredentialProvider.Microsoft\bin\$(BuildConfiguration)\netcoreapp3.0\publish\'
     contents: '**\*'
     targetFolder: '$(Build.ArtifactStagingDirectory)\tarball\plugins\netcore\CredentialProvider.Microsoft\'
     cleanTargetFolder: true
@@ -101,7 +101,7 @@ steps:
     includeRootFolder: false
     archiveType: 'tar'
     tarCompression: 'gz'
-    archiveFile: '$(Build.ArtifactStagingDirectory)\$(BuildConfiguration)\Microsoft.NetCore2.NuGet.CredentialProvider.tar.gz'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\$(BuildConfiguration)\Microsoft.NetCore3.NuGet.CredentialProvider.tar.gz'
     replaceExistingArchive: true
 
 # NOTE: Changing the name of the zip will break things. Please don't do it.
@@ -111,7 +111,7 @@ steps:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)\tarball\'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)\$(BuildConfiguration)\Microsoft.NetCore2.NuGet.CredentialProvider.zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\$(BuildConfiguration)\Microsoft.NetCore3.NuGet.CredentialProvider.zip'
     replaceExistingArchive: true
 
 - task: CopyFiles@2

@@ -9,7 +9,7 @@ trigger:
 
 variables:
   BuildConfiguration: 'Debug'
-  PushNupkg: 'True'
+  PushNupkg: 'False'
   TeamName: 'Package Experience'
 
 steps:
